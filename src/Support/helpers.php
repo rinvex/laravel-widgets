@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
 if (! function_exists('widget')) {
     /**
      * Instantiate a widget instance.
      *
-     * @param  string $widget
-     * @param  array  $params
-     * @param  bool   $async
+     * @param string $widget
+     * @param array  $params
+     * @param bool   $async
      *
      * @throws \Rinvex\Widgets\Exceptions\WidgetException
      *
