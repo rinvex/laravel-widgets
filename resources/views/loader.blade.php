@@ -1,0 +1,3 @@
+<script>
+    {{ $asyncCall }}
+</script>
