@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Rinvex\Widgets\Factories;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\HtmlString;
 use Rinvex\Widgets\Models\AbstractWidget;
 use Rinvex\Widgets\Exceptions\WidgetException;
@@ -19,9 +20,9 @@ class WidgetFactory
     /**
      * Instantiate a widget instance.
      *
-     * @param  string $widget
-     * @param  array  $params
-     * @param  bool   $async
+     * @param string $widget
+     * @param array  $params
+     * @param bool   $async
      *
      * @throws \Rinvex\Widgets\Exceptions\WidgetException
      *
