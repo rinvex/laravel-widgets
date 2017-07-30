@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Rinvex\Widgets\Models;
 
 use Illuminate\Support\Collection;
@@ -31,6 +33,7 @@ class WidgetGroup extends Collection
     {
         $output = $this->sortBy('position')->transform(function ($widget, $key) {
             $content = $this->performWrap($key, $widget, $this->makeWidget($widget));
+
             return $this->keys()->last() !== $key ? $this->separator.$content : $content;
         })->reduce(function ($carry, $widget) {
             return $carry.$widget;
