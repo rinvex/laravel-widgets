@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Rinvex\Widgets\Models;
 
 abstract class AbstractWidget

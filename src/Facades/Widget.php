@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Rinvex\Widgets\Facades;
 
 use Illuminate\Support\Collection;
-use Rinvex\Widgets\Models\WidgetGroup;
 use Illuminate\Support\Facades\Facade;
+use Rinvex\Widgets\Models\WidgetGroup;
 
 class Widget extends Facade
 {
