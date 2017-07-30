@@ -72,6 +72,12 @@ $recentPosts = Widget::make('App\Widgets\RecentPosts');
 
 Now you can use that `$recentPosts` anywhere you want, it contains the widget result.
 
+For your convenience, **Rinvex Widgets** include also a widget helper for easy usage. Example:
+
+```blade
+$recentPosts = widget('App\Widgets\RecentPosts');
+```
+
 You can also call widgets from within views using blade directive with same signature as follows:
 
 ```blade
