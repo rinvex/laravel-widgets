@@ -1,25 +1,25 @@
 <?php
 
-
-use Rinvex\Widgets\Factories\WidgetFactory;
-
 if (! function_exists('widget')) {
     /**
-     * Get the evaluated widget contents for the given widget.
+     * Instantiate a widget instance.
      *
-     * @param  string  $widget
-     * @param  array   $data
-     * @param  array   $mergeData
-     * @return \Rinvex\Widgets\Factories\WidgetFactory
+     * @param  string $widget
+     * @param  array  $params
+     * @param  bool   $async
+     *
+     * @throws \Rinvex\Widgets\Exceptions\WidgetException
+     *
+     * @return \Illuminate\Support\HtmlString
      */
-    function widget($widget = null, $data = [], $mergeData = [])
+    function widget($widget, array $params = [], bool $async = false)
     {
-        $factory = app(WidgetFactory::class);
+        $factory = app('rinvex.widgets');
 
         if (func_num_args() === 0) {
             return $factory;
         }
 
-        //return $factory->make($widget, $data, $mergeData);
+        return $factory->make($widget, $params, $async);
     }
 }
