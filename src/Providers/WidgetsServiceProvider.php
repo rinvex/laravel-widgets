@@ -23,7 +23,21 @@ class WidgetsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(realpath(__DIR__.'/../../config/config.php'), 'rinvex.widgets');
 
         $this->registerWidgetFactory();
+        $this->registerWidgetCollection();
         $this->registerWidgetArtisanCommand();
+    }
+
+    /**
+     * Register the widget collection.
+     *
+     * @return void
+     */
+    public function registerWidgetCollection()
+    {
+        // Register widget collection
+        $this->app->singleton('rinvex.widgets.list', function ($app) {
+            return collect();
+        });
     }
 
     /**

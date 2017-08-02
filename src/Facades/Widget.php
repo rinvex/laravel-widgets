@@ -16,6 +16,16 @@ class Widget extends Facade
     }
 
     /**
+     * Get the widgets collection.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function list(): Collection
+    {
+        return app('rinvex.widgets.list');
+    }
+
+    /**
      * Get the widget groups collection.
      *
      * @return \Illuminate\Support\Collection
