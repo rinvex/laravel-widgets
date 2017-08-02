@@ -100,7 +100,7 @@ class WidgetsServiceProvider extends ServiceProvider
     public function loadRoutes(Router $router)
     {
         // Load routes
-        if (! $this->app->routesAreCached()) {
+        if (! $this->app->routesAreCached() && config('rinvex.widgets.register_routes')) {
             $router->get('widget', function () {
                 $factory = app('rinvex.widgets');
                 $widgetName = urldecode(request()->input('name'));
