@@ -19,6 +19,9 @@ class WidgetsServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // Merge config
+        $this->mergeConfigFrom(realpath(__DIR__.'/../../config/config.php'), 'rinvex.widgets');
+
         $this->registerWidgetFactory();
         $this->registerWidgetArtisanCommand();
     }
@@ -68,6 +71,11 @@ class WidgetsServiceProvider extends ServiceProvider
         // Load views
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'rinvex/widgets');
 
+        if ($this->app->runningInConsole()) {
+            // Publish Resources
+            $this->publishResources();
+        }
+
         $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
 
             // @widget('widgetName')
@@ -101,5 +109,15 @@ class WidgetsServiceProvider extends ServiceProvider
                 return call_user_func_array([$factory, $widgetName], $widgetParams);
             })->name('rinvex.widgets.async')->middleware('web');
         }
+    }
+
+    /**
+     * Publish resources.
+     *
+     * @return void
+     */
+    protected function publishResources()
+    {
+        $this->publishes([realpath(__DIR__.'/../../config/config.php') => config_path('rinvex.widgets.php')], 'rinvex-widgets-config');
     }
 }
