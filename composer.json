@@ -70,8 +70,7 @@
                 "Rinvex\\Widgets\\Providers\\WidgetsServiceProvider"
             ],
             "aliases": {
-                "Widget": "Rinvex\\Widgets\\Facades\\Widget",
-                "AsyncWidget": "Rinvex\\Widgets\\Facades\\AsyncWidget"
+                "Widget": "Rinvex\\Widgets\\Facades\\Widget"
             }
         }
     },
