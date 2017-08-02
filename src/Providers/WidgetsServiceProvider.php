@@ -97,7 +97,7 @@ class WidgetsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function loadRoutes(Router $router)
+    protected function loadRoutes(Router $router)
     {
         // Load routes
         if (! $this->app->routesAreCached() && config('rinvex.widgets.register_routes')) {
@@ -108,6 +108,11 @@ class WidgetsServiceProvider extends ServiceProvider
 
                 return call_user_func_array([$factory, $widgetName], $widgetParams);
             })->name('rinvex.widgets.async')->middleware('web');
+
+            $this->app->booted(function () use ($router) {
+                $router->getRoutes()->refreshNameLookups();
+                $router->getRoutes()->refreshActionLookups();
+            });
         }
     }
 
