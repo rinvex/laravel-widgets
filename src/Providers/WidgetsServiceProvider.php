@@ -79,16 +79,12 @@ class WidgetsServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        // Load routes
+        // Load resources
         $this->loadRoutes($router);
-
-        // Load views
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'rinvex/widgets');
 
-        if ($this->app->runningInConsole()) {
-            // Publish Resources
-            $this->publishResources();
-        }
+        // Publish Resources
+        ! $this->app->runningInConsole() || $this->publishResources();
 
         $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
 
@@ -138,5 +134,6 @@ class WidgetsServiceProvider extends ServiceProvider
     protected function publishResources()
     {
         $this->publishes([realpath(__DIR__.'/../../config/config.php') => config_path('rinvex.widgets.php')], 'rinvex-widgets-config');
+        $this->publishes([realpath(__DIR__.'/../../resources/views') => resource_path('views/vendor/rinvex/widgets')], 'rinvex-widgets-views');
     }
 }
