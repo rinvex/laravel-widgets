@@ -87,15 +87,14 @@ class WidgetsServiceProvider extends ServiceProvider
         ! $this->app->runningInConsole() || $this->publishResources();
 
         $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
-
             // @widget('widgetName')
             $bladeCompiler->directive('widget', function ($expression) {
-                return "<?php app('rinvex.widgets')->run({$expression}): ?>";
+                return "<?php echo app('rinvex.widgets')->make({$expression}); ?>";
             });
 
             // @widgetGroup('widgetName')
             $bladeCompiler->directive('widgetGroup', function ($expression) {
-                return "<?php app('rinvex.widgets.group')->group({$expression})->render(): ?>";
+                return "<?php echo app('rinvex.widgets.group')->group({$expression})->render(); ?>";
             });
         });
     }
