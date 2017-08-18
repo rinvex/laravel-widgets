@@ -13,6 +13,15 @@ use Rinvex\Widgets\Console\Commands\WidgetMakeCommand;
 class WidgetsServiceProvider extends ServiceProvider
 {
     /**
+     * The commands to be registered.
+     *
+     * @var array
+     */
+    protected $commands = [
+        WidgetMakeCommand::class => 'command.rinvex.widgets.make',
+    ];
+
+    /**
      * Register the service provider.
      *
      * @return void
@@ -24,7 +33,15 @@ class WidgetsServiceProvider extends ServiceProvider
 
         $this->registerWidgetFactory();
         $this->registerWidgetCollection();
-        $this->registerWidgetArtisanCommand();
+
+        // Register artisan commands
+        foreach ($this->commands as $key => $value) {
+            $this->app->singleton($value, function ($app) use ($key) {
+                return new $key();
+            });
+        }
+
+        $this->commands(array_values($this->commands));
     }
 
     /**
@@ -56,20 +73,6 @@ class WidgetsServiceProvider extends ServiceProvider
         $this->app->singleton('rinvex.widgets.group', function () {
             return collect();
         });
-    }
-
-    /**
-     * Register the widget artisan command.
-     *
-     * @return void
-     */
-    public function registerWidgetArtisanCommand()
-    {
-        $this->app->singleton('command.rinvex.widgets.make', function ($app) {
-            return new WidgetMakeCommand($app['files']);
-        });
-
-        $this->commands('command.rinvex.widgets.make');
     }
 
     /**
