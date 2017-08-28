@@ -50,7 +50,7 @@ class WidgetGroup extends Collection
      * @param bool   $async
      * @param int    $position
      *
-     * @return $this
+     * @return static
      */
     public function addWidget(string $name, array $params = [], bool $async = false, int $position = 100): self
     {
@@ -67,7 +67,7 @@ class WidgetGroup extends Collection
      *
      * @param string $separator
      *
-     * @return $this
+     * @return static
      */
     public function separateWith(string $separator): self
     {
@@ -82,7 +82,7 @@ class WidgetGroup extends Collection
      *
      * @param callable $callable
      *
-     * @return $this
+     * @return static
      */
     public function wrap(callable $callable): self
     {
