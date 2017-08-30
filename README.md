@@ -18,14 +18,7 @@
     ```shell
     composer require rinvex/widgets
     ```
-
-2. **Optionally** you can publish config files by running the following commands:
-    ```shell
-    // Publish config
-    php artisan vendor:publish --tag="rinvex-widgets-config"
-    ```
-
-3. Done!
+2. Done!
 
 
 ## Usage
