@@ -60,7 +60,7 @@ abstract class AbstractWidget
      *
      * @param float $reloadTimeout
      *
-     * @return static
+     * @return $this
      */
     public function setReloadTimeout(float $reloadTimeout)
     {
@@ -84,7 +84,7 @@ abstract class AbstractWidget
      *
      * @param string $id
      *
-     * @return static
+     * @return $this
      */
     public function setId(string $id)
     {
@@ -108,7 +108,7 @@ abstract class AbstractWidget
      *
      * @param array $params
      *
-     * @return static
+     * @return $this
      */
     public function setParams(array $params)
     {
@@ -133,7 +133,7 @@ abstract class AbstractWidget
      * @param mixed $key
      * @param mixed $value
      *
-     * @return static
+     * @return $this
      */
     public function setParam($key, $value)
     {
@@ -157,7 +157,7 @@ abstract class AbstractWidget
      *
      * @param string $container
      *
-     * @return static
+     * @return $this
      */
     public function setContainer(string $container)
     {
