@@ -59,7 +59,7 @@ class RecentPosts extends AbstractWidget
 
 All widgets **MUST** extend the `Rinvex\Widgets\Models\AbstractWidget`, and **MUST** have a public `make` method, you can return whatever you want from inside that method, with complete freedom and full flexbility to write your own logic and return your results whether it's pure data array/json, or rendered view or whatever. It's really up to you. Treat this method as a normal PHP method, or a controller action. You may return `view('view.path.here')` or other content to be rendered and displayed.
 
-The `Widget::make()` method is resolved via [Service Container](https://laravel.com/docs/5.4/container), so method injection is also available here.
+The `Widget::make()` method is resolved via [Service Container](https://laravel.com/docs/master/container), so method injection is also available here.
 
 ### Call Your Widgets
 
@@ -190,7 +190,7 @@ $groups = Widget::groups();
 ```
 
 > **Notes:**
-> - Both results of `Widget::group('sidebar')` and `Widget::groups()` are collections, and you can utilize it exactly as you do with any [Laravel Collections](https://laravel.com/docs/5.4/collections).
+> - Both results of `Widget::group('sidebar')` and `Widget::groups()` are collections, and you can utilize it exactly as you do with any [Laravel Collections](https://laravel.com/docs/master/collections).
 > - The `Widget::group('sidebar')` returns a collection of widgets, and `Widget::groups()` returns a collection of widget groups.
 
 You can set a separator that will be display between widgets inside the same group as follows:
