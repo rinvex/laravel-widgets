@@ -52,7 +52,7 @@ class WidgetGroup extends Collection
      *
      * @return static
      */
-    public function addWidget(string $name, array $params = [], bool $async = false, int $position = 100): self
+    public function addWidget(string $name, array $params = [], bool $async = false, int $position = 100)
     {
         return $this->push([
             'name' => $name,
@@ -69,7 +69,7 @@ class WidgetGroup extends Collection
      *
      * @return static
      */
-    public function separateWith(string $separator): self
+    public function separateWith(string $separator)
     {
         $this->separator = $separator;
 
@@ -84,7 +84,7 @@ class WidgetGroup extends Collection
      *
      * @return static
      */
-    public function wrap(callable $callable): self
+    public function wrap(callable $callable)
     {
         $this->wrapCallback = $callable;
 
