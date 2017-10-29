@@ -3,7 +3,6 @@
 **Rinvex Widgets** is a powerful and easy to use widget system, that combines the both the power of code logic and the flexibility of template views. You can create asynchronous widgets, reloadable widgets, and use the console generator to auto generate your widgets, all out of the box.
 
 [![Packagist](https://img.shields.io/packagist/v/rinvex/widgets.svg?label=Packagist&style=flat-square)](https://packagist.org/packages/rinvex/widgets)
-[![VersionEye Dependencies](https://img.shields.io/versioneye/d/php/rinvex:widgets.svg?label=Dependencies&style=flat-square)](https://www.versioneye.com/php/rinvex:widgets/)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/rinvex/widgets.svg?label=Scrutinizer&style=flat-square)](https://scrutinizer-ci.com/g/rinvex/widgets/)
 [![Code Climate](https://img.shields.io/codeclimate/github/rinvex/widgets.svg?label=CodeClimate&style=flat-square)](https://codeclimate.com/github/rinvex/widgets)
 [![Travis](https://img.shields.io/travis/rinvex/widgets.svg?label=TravisCI&style=flat-square)](https://travis-ci.org/rinvex/widgets)
