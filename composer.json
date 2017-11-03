@@ -1,6 +1,6 @@
 {
     "name": "rinvex/widgets",
-    "description": "Rinvex Widgets is a powerful and easy to use widget system, that combines the both the power of code logic and the flexibility of template views. You can create asynchronous widgets, reloadable widgets, and use the console generator to auto generate your widgets, all out of the box.",
+    "description": "Rinvex Widgets is a powerful and easy to use widget system, that combines both the power of code logic and the flexibility of template views. You can create asynchronous widgets, reloadable widgets, and use the console generator to auto generate your widgets, all out of the box.",
     "keywords": [
         "ajax",
         "async",

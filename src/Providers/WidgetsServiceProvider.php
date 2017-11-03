@@ -13,15 +13,6 @@ use Rinvex\Widgets\Console\Commands\WidgetMakeCommand;
 class WidgetsServiceProvider extends ServiceProvider
 {
     /**
-     * The commands to be registered.
-     *
-     * @var array
-     */
-    protected $commands = [
-        WidgetMakeCommand::class => 'command.rinvex.widgets.make',
-    ];
-
-    /**
      * Register the service provider.
      *
      * @return void
@@ -84,14 +75,14 @@ class WidgetsServiceProvider extends ServiceProvider
         ! $this->app->runningInConsole() || $this->publishResources();
 
         $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
-            // @widget('widgetName')
-            $bladeCompiler->directive('widget', function ($expression) {
-                return "<?php echo app('rinvex.widgets')->make({$expression}); ?>";
+            // @widget('App\Widgets\ExampleWidget')
+            $bladeCompiler->directive('widget', function ($widget, array $params = [], bool $async = false) {
+                return "<?php echo app('rinvex.widgets')->make({$widget}, {$params}, {$async}); ?>";
             });
 
-            // @widgetGroup('widgetName')
-            $bladeCompiler->directive('widgetGroup', function ($expression) {
-                return "<?php echo app('rinvex.widgets.group')->group({$expression})->render(); ?>";
+            // @widgetGroup('widgetGroupName')
+            $bladeCompiler->directive('widgetGroup', function ($widgetGroup) {
+                return "<?php echo app('rinvex.widgets.group')->group({$widgetGroup})->render(); ?>";
             });
         });
     }
@@ -141,12 +132,10 @@ class WidgetsServiceProvider extends ServiceProvider
     protected function registerCommands()
     {
         // Register artisan commands
-        foreach ($this->commands as $key => $value) {
-            $this->app->singleton($value, function ($app) use ($key) {
-                return new $key();
-            });
-        }
+        $this->app->singleton('command.rinvex.widgets.make', function ($app) {
+            return new WidgetMakeCommand($app['files']);
+        });
 
-        $this->commands(array_values($this->commands));
+        $this->commands(['command.rinvex.widgets.make']);
     }
 }

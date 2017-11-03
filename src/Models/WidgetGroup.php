@@ -32,7 +32,7 @@ class WidgetGroup extends Collection
     public function render(): HtmlString
     {
         $output = $this->sortBy('position')->transform(function ($widget, $key) {
-            $content = $this->performWrap($key, $widget, $this->makeWidget($widget));
+            $content = $this->performWrap($key, $widget);
 
             return $this->keys()->last() !== $key ? $this->separator.$content : $content;
         })->reduce(function ($carry, $widget) {
@@ -45,21 +45,16 @@ class WidgetGroup extends Collection
     /**
      * Add a widget to the group.
      *
-     * @param string $name
-     * @param array  $params
-     * @param bool   $async
-     * @param int    $position
+     * @param \Rinvex\Widgets\Models\AbstractWidget $widget
+     * @param int                                   $position
      *
      * @return $this
      */
-    public function addWidget(string $name, array $params = [], bool $async = false, int $position = 100)
+    public function addWidget(AbstractWidget $widget, int $position = 100)
     {
-        return $this->push([
-            'name' => $name,
-            'async' => $async,
-            'params' => $params,
-            'position' => $position,
-        ]);
+        $this->offsetSet($position, $widget);
+
+        return $this;
     }
 
     /**
@@ -84,7 +79,7 @@ class WidgetGroup extends Collection
      *
      * @return $this
      */
-    public function wrap(callable $callable)
+    public function wrapCallback(callable $callable)
     {
         $this->wrapCallback = $callable;
 
@@ -92,29 +87,16 @@ class WidgetGroup extends Collection
     }
 
     /**
-     * Display a widget according to its type.
-     *
-     * @param array $widget
-     *
-     * @return \Illuminate\Support\HtmlString
-     */
-    protected function makeWidget($widget): HtmlString
-    {
-        return call_user_func_array([app('rinvex.widgets'), 'make'], [$widget['name'], $widget['params'], $widget['async']]);
-    }
-
-    /**
      * Execute the callback that defines extra markup that
      * wraps every widget in the group with a special markup.
      *
-     * @param int    $key
-     * @param array  $widget
-     * @param string $content
+     * @param int                            $key
+     * @param \Illuminate\Support\HtmlString $widget
      *
      * @return string
      */
-    protected function performWrap(int $key, array $widget, string $content)
+    protected function performWrap(int $key, HtmlString $widget)
     {
-        return is_callable($callback = $this->wrapCallback) ? $callback($key, $widget, $content) : $content;
+        return is_callable($callback = $this->wrapCallback) ? $callback($key, $widget) : $widget;
     }
 }
