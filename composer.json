@@ -5,6 +5,7 @@
         "ajax",
         "async",
         "rinvex",
+        "laravel",
         "widgets",
         "cache",
         "page",
@@ -56,7 +57,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Rinvex\\Widgets\\Test\\": "tests"
+            "Rinvex\\Widgets\\Tests\\": "tests"
         }
     },
     "config": {
