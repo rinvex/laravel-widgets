@@ -113,7 +113,7 @@ public function placeholder()
 
 > **Notes:**
 > - **Rinvex Widgets** package auto register a new route with `rinvex.widgets.async` name, which could be accessed via `http://yourproject.app/widget`. That route accepts asynchronous widget calls, with required parameters, all encrypted and process it then return the response.
-> - If you need to modify the default route definition or behaviour, you may need to copy `Rinvex\Widgets\Providers\WidgetsServiceProvider` to your app, modify it according to your needs and register it in your Laravel application instead of the default one. In such case you may need to disable [Laravel Auto Discovery](https://laravel.com/docs/5.5/packages#package-discovery) for this package **Rinvex Widgets**.
+> - If you need to modify the default route definition or behaviour, you may need to copy `Rinvex\Widgets\Providers\WidgetsServiceProvider` to your app, modify it according to your needs and register it in your Laravel application instead of the default one. In such case you may need to disable [Laravel Auto Discovery](https://laravel.com/docs/master/packages#package-discovery) for this package **Rinvex Widgets**.
 
 ### Reloadable widgets
 
