@@ -74,17 +74,8 @@ class WidgetsServiceProvider extends ServiceProvider
         // Publish Resources
         ! $this->app->runningInConsole() || $this->publishResources();
 
-        $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
-            // @widget('App\Widgets\ExampleWidget', $paramArray, $asyncFlag)
-            $bladeCompiler->directive('widget', function ($expression) {
-                return "<?php echo app('rinvex.widgets')->make({$expression}); ?>";
-            });
-
-            // @widgetGroup('widgetGroupName')
-            $bladeCompiler->directive('widgetGroup', function ($expression) {
-                return "<?php echo app('rinvex.widgets.group')->group({$expression})->render(); ?>";
-            });
-        });
+        // Register blade extensions
+        $this->registerBladeExtensions();
     }
 
     /**
@@ -137,5 +128,25 @@ class WidgetsServiceProvider extends ServiceProvider
         });
 
         $this->commands(['command.rinvex.widgets.make']);
+    }
+
+    /**
+     * Register the blade extensions.
+     *
+     * @return void
+     */
+    protected function registerBladeExtensions()
+    {
+        $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
+            // @widget('App\Widgets\ExampleWidget', $paramArray, $asyncFlag)
+            $bladeCompiler->directive('widget', function ($expression) {
+                return "<?php echo app('rinvex.widgets')->make({$expression}); ?>";
+            });
+
+            // @widgetGroup('widgetGroupName')
+            $bladeCompiler->directive('widgetGroup', function ($expression) {
+                return "<?php echo app('rinvex.widgets.group')->group({$expression})->render(); ?>";
+            });
+        });
     }
 }
