@@ -17,7 +17,7 @@ class WidgetsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         // Merge config
         $this->mergeConfigFrom(realpath(__DIR__.'/../../config/config.php'), 'rinvex.widgets');
@@ -34,7 +34,7 @@ class WidgetsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerWidgetCollection()
+    public function registerWidgetCollection(): void
     {
         // Register widget collection
         $this->app->singleton('rinvex.widgets.list', function ($app) {
@@ -47,7 +47,7 @@ class WidgetsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerWidgetFactory()
+    public function registerWidgetFactory(): void
     {
         $this->app->singleton('rinvex.widgets', function ($app) {
             return new WidgetFactory();
@@ -65,7 +65,7 @@ class WidgetsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot(Router $router): void
     {
         // Load resources
         $this->loadRoutes($router);
@@ -85,7 +85,7 @@ class WidgetsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function loadRoutes(Router $router)
+    protected function loadRoutes(Router $router): void
     {
         // Load routes
         if (! $this->app->routesAreCached() && config('rinvex.widgets.register_routes')) {
@@ -109,7 +109,7 @@ class WidgetsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function publishResources()
+    protected function publishResources(): void
     {
         $this->publishes([realpath(__DIR__.'/../../config/config.php') => config_path('rinvex.widgets.php')], 'rinvex-widgets-config');
         $this->publishes([realpath(__DIR__.'/../../resources/views') => resource_path('views/vendor/rinvex/widgets')], 'rinvex-widgets-views');
@@ -120,7 +120,7 @@ class WidgetsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerCommands()
+    protected function registerCommands(): void
     {
         // Register artisan commands
         $this->app->singleton('command.rinvex.widgets.make', function ($app) {
@@ -135,7 +135,7 @@ class WidgetsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerBladeExtensions()
+    protected function registerBladeExtensions(): void
     {
         $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
             // @widget('App\Widgets\ExampleWidget', $paramArray, $asyncFlag)
