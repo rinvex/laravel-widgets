@@ -34,7 +34,7 @@ class WidgetMakeCommand extends GeneratorCommand
      *
      * @return string
      */
-    protected function getStub()
+    protected function getStub(): string
     {
         return __DIR__.'../../../resources/stubs/widget.stub';
     }
@@ -46,7 +46,7 @@ class WidgetMakeCommand extends GeneratorCommand
      *
      * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return $rootNamespace.'\Widgets';
     }

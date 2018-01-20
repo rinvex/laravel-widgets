@@ -95,7 +95,7 @@ class WidgetGroup extends Collection
      *
      * @return string
      */
-    protected function performWrap(int $key, HtmlString $widget)
+    protected function performWrap(int $key, HtmlString $widget): string
     {
         return is_callable($callback = $this->wrapCallback) ? $callback($key, $widget) : $widget;
     }
