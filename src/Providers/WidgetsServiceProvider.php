@@ -49,11 +49,7 @@ class WidgetsServiceProvider extends ServiceProvider
      */
     public function registerWidgetFactory(): void
     {
-        $this->app->singleton('rinvex.widgets', function ($app) {
-            return new WidgetFactory();
-        });
-
-        $this->app->alias('rinvex.widgets', WidgetFactory::class);
+        $this->app->singleton('rinvex.widgets', WidgetFactory::class);
 
         $this->app->singleton('rinvex.widgets.group', function () {
             return collect();
