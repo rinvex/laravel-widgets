@@ -1,13 +1,11 @@
 # Rinvex Widgets
 
-**Rinvex Widgets** is a powerful and easy to use widget system, that combines the both the power of code logic and the flexibility of template views. You can create asynchronous widgets, reloadable widgets, and use the console generator to auto generate your widgets, all out of the box.
+**Rinvex Widgets** is a powerful and easy to use widget system, that combines both the power of code logic and the flexibility of template views. You can create asynchronous widgets, reloadable widgets, and use the console generator to auto generate your widgets, all out of the box.
 
 [![Packagist](https://img.shields.io/packagist/v/rinvex/widgets.svg?label=Packagist&style=flat-square)](https://packagist.org/packages/rinvex/widgets)
-[![VersionEye Dependencies](https://img.shields.io/versioneye/d/php/rinvex:widgets.svg?label=Dependencies&style=flat-square)](https://www.versioneye.com/php/rinvex:widgets/)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/rinvex/widgets.svg?label=Scrutinizer&style=flat-square)](https://scrutinizer-ci.com/g/rinvex/widgets/)
 [![Code Climate](https://img.shields.io/codeclimate/github/rinvex/widgets.svg?label=CodeClimate&style=flat-square)](https://codeclimate.com/github/rinvex/widgets)
 [![Travis](https://img.shields.io/travis/rinvex/widgets.svg?label=TravisCI&style=flat-square)](https://travis-ci.org/rinvex/widgets)
-[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/7923f41b-09fc-40f1-ae8e-7d19afae897c.svg?label=SensioLabs&style=flat-square)](https://insight.sensiolabs.com/projects/7923f41b-09fc-40f1-ae8e-7d19afae897c)
 [![StyleCI](https://styleci.io/repos/98805007/shield)](https://styleci.io/repos/98805007)
 [![License](https://img.shields.io/packagist/l/rinvex/widgets.svg?label=License&style=flat-square)](https://github.com/rinvex/widgets/blob/develop/LICENSE)
 
@@ -18,13 +16,12 @@
     ```shell
     composer require rinvex/widgets
     ```
-
 2. Done!
 
 
 ## Usage
 
-### Create Your Widget
+### Create your widget
 
 Let's assume that we want to make a list of recent posts as a widget, and reuse it in several locations.
 
@@ -60,17 +57,15 @@ class RecentPosts extends AbstractWidget
 
 All widgets **MUST** extend the `Rinvex\Widgets\Models\AbstractWidget`, and **MUST** have a public `make` method, you can return whatever you want from inside that method, with complete freedom and full flexbility to write your own logic and return your results whether it's pure data array/json, or rendered view or whatever. It's really up to you. Treat this method as a normal PHP method, or a controller action. You may return `view('view.path.here')` or other content to be rendered and displayed.
 
-The `Widget::make()` method is resolved via [Service Container](https://laravel.com/docs/5.4/container), so method injection is also available here.
+### Call your widgets
 
-### Call Your Widgets
-
-For consistency purposes there's a calling convensions for widgets, which adheres to Laravel's own methods on calling *callables* as such calling controller actions for example `App\Http\Controllers\ExampleController@action`, so as follows the way you may call your newly created widget:
+Widgets are called by their fully qualified namespaces, for example check the following code:
 
 ```php
-$recentPosts = Widget::make('App\Widgets\RecentPosts');
+$recentPosts = app('rinvex.widgets')->make('App\Widgets\RecentPosts');
 ```
 
-Now you can use that `$recentPosts` anywhere you want, it contains the widget result.
+Now you can use that `$recentPosts` anywhere you want in your view, it contains the widget result.
 
 For your convenience, **Rinvex Widgets** include also a widget helper for easy usage. Example:
 
@@ -78,21 +73,25 @@ For your convenience, **Rinvex Widgets** include also a widget helper for easy u
 $recentPosts = widget('App\Widgets\RecentPosts');
 ```
 
-You can also call widgets from within views using blade directive with same signature as follows:
+You can also call widgets inside views using blade directive with same signature as follows:
 
 ```blade
 @widget('App\Widgets\RecentPosts')
 ```
 
-The `Widget::make()` method takes three parameters, the first one the only mandatory parameter which is the namespace of the widget you're calling, the second one is any parameters you would like to pass to widget's `make` method, the third and the last one is a boolean flag with true or false for asynchronous loading, will talk about that later.
+And last but not least, there's a `Widget` facade that's automatically registered into your application, so you can use `Widget::make('App\Widgets\RecentPosts')` too.
 
-### Passing variables to widget
+The `Widget::make()` method (and similarly all the above alternative calling methods) accepts three parameters; The first parameter is the only mandatory parameter which is the fully qualified namespace of the widget you're calling, the second parameter is for optional arguments to be passed to the widget constructor, and the third parameter is a boolean flag with true or false for asynchronous loading, will talk about that later.
+
+### Widget parameters
+
+As mentioned before, the widget creation takes three parameters; The first parameter is the only mandatory parameter which is the fully qualified namespace of the widget you're calling, the second parameter is for optional arguments to be passed to the widget constructor, and the third parameter is a boolean flag with true or false for asynchronous loading.
 
 ```php
 $recentPosts = Widget::make('App\Widgets\RecentPosts', ['param1' => 'Value #1'], true);
 ```
 
-As you can see, this widget is now loaded asynchronous.
+As you can see, this widget is now loaded asynchronously, more about this feature later.
 
 ### Asynchronous widgets
 
@@ -100,9 +99,9 @@ In some situations it can be very beneficial to load widget content with AJAX.
 
 Fortunately, this can be achieved very easily! All you need to do is to pass `true` as the third parameter to the Widget Facade or the blade directive. Example: `Widget::make('Widget\Class\Path', [], true)`, and simirally `@widget('Widget\Class\Path', [], true)`.
 
-> **Note:** Widget params are encrypted and sent via async call. Expect them to be json_encoded and json_decoded before and afterwards.
+> **Note:** When calling widgets asynchronously, the parameters are sent encrypted in the request, so make sure they are `json_encoded` and `json_decoded` before and afterwards.
 
-By default nothing is shown until async call is finished. This can be customized by adding a `placeholder()` method to the widget class, and return any string to be displayed. See the following example:
+By default nothing is shown until asynchronous call is finished. This can be customized by adding a `placeholder()` method to the widget class, and return any string to be displayed. See the following example:
 
 ```php
 public function placeholder()
@@ -112,8 +111,8 @@ public function placeholder()
 ```
 
 > **Notes:**
-> - **Rinvex Widgets** package auto register a new route with `rinvex.widgets.async` name, which could be accessed via `http://yourproject.app/widget`. That route accepts async widget calls, with required parameters, all encrypted and process it then return the response.
-> - If you need to modify the default route definition or behaviour, you may need to copy `Rinvex\Widgets\Providers\WidgetsServiceProvider` to your app, modify it according to your needs and register it in your Laravel application instead of the default one. In such case you may need to disable Laravel Auto Discovery for this package **Rinvex Widgets**.
+> - **Rinvex Widgets** package auto register a new route with `rinvex.widgets.async` name, which could be accessed via `http://yourproject.app/widget`. That route accepts asynchronous widget calls, with required parameters, all encrypted and process it then return the response.
+> - If you need to modify the default route definition or behaviour, you may need to copy `Rinvex\Widgets\Providers\WidgetsServiceProvider` to your app, modify it according to your needs and register it in your Laravel application instead of the default one. In such case you may need to disable [Laravel Auto Discovery](https://laravel.com/docs/master/packages#package-discovery) for this package **Rinvex Widgets**.
 
 ### Reloadable widgets
 
@@ -133,13 +132,13 @@ class RecentPosts extends AbstractWidget
 }
 ```
 
-Both sync and async widgets can become reloadable. You should use this feature with care, because it can easily spam your app with async calls if timeouts are too low.
+Both synchronous and asynchronous widgets can become reloadable. You should use this feature with care, because it can easily spam your app with asynchronous calls if timeouts are too low.
 
 In case you need short response rate or realtime, you may have to consider using web sockets which is better in such case, but it's not implemented by default in this package.
 
 ### Container
 
-Async and Reloadable widgets both require some DOM interaction so they wrap all widget output in a html container. This container is defined by `AbstractWidget::container()` method and can be customized too.
+Asynchronous and Reloadable widgets both require some DOM interaction so they wrap all widget output in a html container. This container is defined by `AbstractWidget::container()` method and can be customized too.
 
 To make it easy, flexible, cacheable, better in performance, and even overridable, we made that container accepts a view path, so you can use whatever syntax you want in that view including of course the lovely blade tags and directives.
 
@@ -157,20 +156,19 @@ class RecentPosts extends AbstractWidget
 }
 ```
 
-> **Note:** Nested async or reloadable widgets are not supported.
+> **Note:** Nesting asynchronous and reloadable widgets is currently not supported.
 
-### Widget Groups
+### Widget groups
 
-In most cases Blade is a perfect tool for setting the position and order of widgets. However, sometimes you may find useful to approach widgets from a columns perspective as follows:
+In most cases Blade is a perfect tool for setting the position and order of widgets. However, sometimes you may find it useful to approach widgets from a columns perspective by grouping them together. Check the following example:
 
 ```php
-// add several widgets to the 'sidebar' group anywhere you want
-Widget::group('sidebar')->addWidget('widgetName1', $params);
-Widget::group('sidebar')->addWidget('widgetName1', $params, true);
-Widget::group('sidebar')->addWidget('widgetName1', $params, true, 50);
+// add several widgets to the 'sidebar' group
+Widget::group('sidebar')->addWidget(Widget::make('App\Widgets\RecentPosts'), 10);
+Widget::group('sidebar')->addWidget(Widget::make('App\Widgets\LatestVisitors'), 20);
 ```
 
-The `Widget::addWidget()` method accepts four parameters, the first three are the same as `Widget::make()` exactly, and the fourth optional parameters is the position where you'd like to place that widget in that group. Position?! Yes, exactly. You can order widgets inside each group, and you can imagine widget groups as a CMS columns, that way you can structure your page the way you want.
+The `Widget::addWidget()` method accepts two parameters, the first parameter is the rendered widget, which is an instance of `Illuminate\Support\HtmlString`, and the second parameter is the position where you'd like to place that widget in that group. Position?! Yes, exactly. You can order widgets inside each group, and you can imagine widget groups as a CMS columns, that way you can structure your page the way you want.
 
 To render a widget group and print the output you can do the following:
 
@@ -191,24 +189,23 @@ $groups = Widget::groups();
 ```
 
 > **Notes:**
-> - Both results of `Widget::group('sidebar')` and `Widget::groups()` are collections, and you can utilize it exactly as you do with any [Laravel Collections](https://laravel.com/docs/5.4/collections).
-> - The `Widget::group('sidebar')` returns a collection of widgets, and `Widget::groups()` returns a collection of widget groups.
+> - The `Widget::group('sidebar')` returns a collection of widgets, and `Widget::groups()` returns a collection of widget groups. Both collections can be utilized exactly the same way as [Laravel Collections](https://laravel.com/docs/master/collections).
 
 You can set a separator that will be display between widgets inside the same group as follows:
 
 ```php
-Widget::group('sidebar')->separateWith('<hr>')->...;
+Widget::group('sidebar')->separateWith('<hr>');
 ```
 
 You can also wrap each widget in a group using `wrap` method like that.
 
 ```php
-Widget::group('sidebar')->wrap(function ($key, $widget, $content) {
-    return "<div class='widget-{$key}'>{$content}</div>";
-})->...;
+Widget::group('sidebar')->wrapCallback(function ($key, $widget) {
+    return "<div class='widget-{$key}'>{$widget}</div>";
+});
 ```
 
-The `wrap()` method accept a callback, that accepts three variables. The first one is the index/key of that widget in the group, the second one is the widget object itself, and the third one is the rendered content of the widget as HTML string. Note that you've full access to the whole widget group collection, so you can query the total number of widgets for example `$this->count()` or any other information you may need to utilize.
+The `wrapCallback()` method accept a callback, that accepts two variables. The first one is the index/key of that widget in the group, the second one is the rendered content of the widget as `\Illuminate\Support\HtmlString` object. Note that you've full access to the whole widget group collection, so you can query the total number of widgets for example `$this->count()` or any other information you may need to utilize.
 
 Checking the state of a widget group:
 
@@ -276,4 +273,4 @@ Rinvex is a software solutions startup, specialized in integrated enterprise sol
 
 This software is released under [The MIT License (MIT)](LICENSE).
 
-(c) 2016-2017 Rinvex LLC, Some rights reserved.
+(c) 2016-2018 Rinvex LLC, Some rights reserved.

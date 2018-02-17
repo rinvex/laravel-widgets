@@ -28,8 +28,10 @@ class WidgetFactory
      *
      * @return \Illuminate\Support\HtmlString
      */
-    public function make($widget, array $params = [], bool $async = false)
+    public function make(string $widget, array $params = [], bool $async = false)
     {
+        $widget = trim($widget, " \t\n\r\0\x0B\"'");
+
         if (! is_callable([$widget, 'make'])) {
             throw WidgetException::invalidMethod($widget);
         }

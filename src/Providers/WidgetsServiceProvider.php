@@ -17,10 +17,29 @@ class WidgetsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
+        // Merge config
+        $this->mergeConfigFrom(realpath(__DIR__.'/../../config/config.php'), 'rinvex.widgets');
+
         $this->registerWidgetFactory();
-        $this->registerWidgetArtisanCommand();
+        $this->registerWidgetCollection();
+
+        // Register console commands
+        ! $this->app->runningInConsole() || $this->registerCommands();
+    }
+
+    /**
+     * Register the widget collection.
+     *
+     * @return void
+     */
+    public function registerWidgetCollection(): void
+    {
+        // Register widget collection
+        $this->app->singleton('rinvex.widgets.list', function ($app) {
+            return collect();
+        });
     }
 
     /**
@@ -28,13 +47,9 @@ class WidgetsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerWidgetFactory()
+    public function registerWidgetFactory(): void
     {
-        $this->app->singleton('rinvex.widgets', function ($app) {
-            return new WidgetFactory();
-        });
-
-        $this->app->alias('rinvex.widgets', WidgetFactory::class);
+        $this->app->singleton('rinvex.widgets', WidgetFactory::class);
 
         $this->app->singleton('rinvex.widgets.group', function () {
             return collect();
@@ -42,44 +57,21 @@ class WidgetsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the widget artisan command.
-     *
-     * @return void
-     */
-    public function registerWidgetArtisanCommand()
-    {
-        $this->app->singleton('command.rinvex.widgets.make', function ($app) {
-            return new WidgetMakeCommand($app['files']);
-        });
-
-        $this->commands('command.rinvex.widgets.make');
-    }
-
-    /**
      * Bootstrap the application events.
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot(Router $router): void
     {
-        // Load routes
+        // Load resources
         $this->loadRoutes($router);
-
-        // Load views
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'rinvex/widgets');
 
-        $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
+        // Publish Resources
+        ! $this->app->runningInConsole() || $this->publishResources();
 
-            // @widget('widgetName')
-            $bladeCompiler->directive('widget', function ($expression) {
-                return "<?php app('rinvex.widgets')->run({$expression}): ?>";
-            });
-
-            // @widgetGroup('widgetName')
-            $bladeCompiler->directive('widgetGroup', function ($expression) {
-                return "<?php app('rinvex.widgets.group')->group({$expression})->render(): ?>";
-            });
-        });
+        // Register blade extensions
+        $this->registerBladeExtensions();
     }
 
     /**
@@ -89,10 +81,10 @@ class WidgetsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function loadRoutes(Router $router)
+    protected function loadRoutes(Router $router): void
     {
         // Load routes
-        if (! $this->app->routesAreCached()) {
+        if (! $this->app->routesAreCached() && config('rinvex.widgets.register_routes')) {
             $router->get('widget', function () {
                 $factory = app('rinvex.widgets');
                 $widgetName = urldecode(request()->input('name'));
@@ -100,6 +92,57 @@ class WidgetsServiceProvider extends ServiceProvider
 
                 return call_user_func_array([$factory, $widgetName], $widgetParams);
             })->name('rinvex.widgets.async')->middleware('web');
+
+            $this->app->booted(function () use ($router) {
+                $router->getRoutes()->refreshNameLookups();
+                $router->getRoutes()->refreshActionLookups();
+            });
         }
+    }
+
+    /**
+     * Publish resources.
+     *
+     * @return void
+     */
+    protected function publishResources(): void
+    {
+        $this->publishes([realpath(__DIR__.'/../../config/config.php') => config_path('rinvex.widgets.php')], 'rinvex-widgets-config');
+        $this->publishes([realpath(__DIR__.'/../../resources/views') => resource_path('views/vendor/rinvex/widgets')], 'rinvex-widgets-views');
+    }
+
+    /**
+     * Register console commands.
+     *
+     * @return void
+     */
+    protected function registerCommands(): void
+    {
+        // Register artisan commands
+        $this->app->singleton('command.rinvex.widgets.make', function ($app) {
+            return new WidgetMakeCommand($app['files']);
+        });
+
+        $this->commands(['command.rinvex.widgets.make']);
+    }
+
+    /**
+     * Register the blade extensions.
+     *
+     * @return void
+     */
+    protected function registerBladeExtensions(): void
+    {
+        $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
+            // @widget('App\Widgets\ExampleWidget', $paramArray, $asyncFlag)
+            $bladeCompiler->directive('widget', function ($expression) {
+                return "<?php echo app('rinvex.widgets')->make({$expression}); ?>";
+            });
+
+            // @widgetGroup('widgetGroupName')
+            $bladeCompiler->directive('widgetGroup', function ($expression) {
+                return "<?php echo app('rinvex.widgets.group')->group({$expression})->render(); ?>";
+            });
+        });
     }
 }

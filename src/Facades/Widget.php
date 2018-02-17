@@ -10,9 +10,24 @@ use Rinvex\Widgets\Models\WidgetGroup;
 
 class Widget extends Facade
 {
+    /**
+     * Get the registered name of the component.
+     *
+     * @return string
+     */
     protected static function getFacadeAccessor()
     {
         return 'rinvex.widgets';
+    }
+
+    /**
+     * Get the widgets collection.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function list(): Collection
+    {
+        return app('rinvex.widgets.list');
     }
 
     /**
