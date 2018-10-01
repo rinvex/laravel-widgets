@@ -1,6 +1,7 @@
 {
-    "name": "rinvex/widgets",
+    "name": "rinvex/laravel-widgets",
     "description": "Rinvex Widgets is a powerful and easy to use widget system, that combines both the power of code logic and the flexibility of template views. You can create asynchronous widgets, reloadable widgets, and use the console generator to auto generate your widgets, all out of the box.",
+    "type": "library",
     "keywords": [
         "ajax",
         "async",
@@ -15,9 +16,9 @@
     "homepage": "https://rinvex.com",
     "support": {
         "email": "help@rinvex.com",
-        "issues": "https://github.com/rinvex/widgets/issues",
-        "source": "https://github.com/rinvex/widgets",
-        "docs": "https://github.com/rinvex/widgets/blob/master/README.md"
+        "issues": "https://github.com/rinvex/laravel-widgets/issues",
+        "source": "https://github.com/rinvex/laravel-widgets",
+        "docs": "https://github.com/rinvex/laravel-widgets/blob/master/README.md"
     },
     "authors": [
         {
@@ -33,7 +34,7 @@
         },
         {
             "name": "The Generous Laravel Community",
-            "homepage": "https://github.com/rinvex/widgets/contributors"
+            "homepage": "https://github.com/rinvex/laravel-widgets/contributors"
         }
     ],
     "require": {

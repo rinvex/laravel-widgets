@@ -2,19 +2,19 @@
 
 **Rinvex Widgets** is a powerful and easy to use widget system, that combines both the power of code logic and the flexibility of template views. You can create asynchronous widgets, reloadable widgets, and use the console generator to auto generate your widgets, all out of the box.
 
-[![Packagist](https://img.shields.io/packagist/v/rinvex/widgets.svg?label=Packagist&style=flat-square)](https://packagist.org/packages/rinvex/widgets)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/rinvex/widgets.svg?label=Scrutinizer&style=flat-square)](https://scrutinizer-ci.com/g/rinvex/widgets/)
-[![Code Climate](https://img.shields.io/codeclimate/github/rinvex/widgets.svg?label=CodeClimate&style=flat-square)](https://codeclimate.com/github/rinvex/widgets)
-[![Travis](https://img.shields.io/travis/rinvex/widgets.svg?label=TravisCI&style=flat-square)](https://travis-ci.org/rinvex/widgets)
+[![Packagist](https://img.shields.io/packagist/v/rinvex/laravel-widgets.svg?label=Packagist&style=flat-square)](https://packagist.org/packages/rinvex/laravel-widgets)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/rinvex/laravel-widgets.svg?label=Scrutinizer&style=flat-square)](https://scrutinizer-ci.com/g/rinvex/laravel-widgets/)
+[![Code Climate](https://img.shields.io/codeclimate/github/rinvex/laravel-widgets.svg?label=CodeClimate&style=flat-square)](https://codeclimate.com/github/rinvex/laravel-widgets)
+[![Travis](https://img.shields.io/travis/rinvex/laravel-widgets.svg?label=TravisCI&style=flat-square)](https://travis-ci.org/rinvex/laravel-widgets)
 [![StyleCI](https://styleci.io/repos/98805007/shield)](https://styleci.io/repos/98805007)
-[![License](https://img.shields.io/packagist/l/rinvex/widgets.svg?label=License&style=flat-square)](https://github.com/rinvex/widgets/blob/develop/LICENSE)
+[![License](https://img.shields.io/packagist/l/rinvex/laravel-widgets.svg?label=License&style=flat-square)](https://github.com/rinvex/laravel-widgets/blob/develop/LICENSE)
 
 
 ## Installation
 
 1. Install the package via composer:
     ```shell
-    composer require rinvex/widgets
+    composer require rinvex/laravel-widgets
     ```
 2. Done!
 
@@ -152,7 +152,7 @@ class RecentPosts extends AbstractWidget
      *
      * @var string
      */
-    protected $container = 'rinvex/widgets::container';
+    protected $container = 'rinvex/laravel-widgets::container';
 }
 ```
 

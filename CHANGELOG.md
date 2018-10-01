@@ -21,5 +21,5 @@ This project adheres to [Semantic Versioning](CONTRIBUTING.md).
 ## v0.0.1 - 2018-02-17
 - Tag first release
 
-[v0.0.3]: https://github.com/rinvex/widgets/compare/v0.0.2...v0.0.3
-[v0.0.2]: https://github.com/rinvex/widgets/compare/v0.0.1...v0.0.2
+[v0.0.3]: https://github.com/rinvex/laravel-widgets/compare/v0.0.2...v0.0.3
+[v0.0.2]: https://github.com/rinvex/laravel-widgets/compare/v0.0.1...v0.0.2
