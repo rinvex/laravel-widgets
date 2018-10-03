@@ -65,7 +65,7 @@ class WidgetsServiceProvider extends ServiceProvider
     {
         // Load resources
         $this->loadRoutes($router);
-        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'rinvex/widgets');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'rinvex/laravel-widgets');
 
         // Publish Resources
         ! $this->app->runningInConsole() || $this->publishResources();
@@ -108,7 +108,7 @@ class WidgetsServiceProvider extends ServiceProvider
     protected function publishResources(): void
     {
         $this->publishes([realpath(__DIR__.'/../../config/config.php') => config_path('rinvex.widgets.php')], 'rinvex-widgets-config');
-        $this->publishes([realpath(__DIR__.'/../../resources/views') => resource_path('views/vendor/rinvex/widgets')], 'rinvex-widgets-views');
+        $this->publishes([realpath(__DIR__.'/../../resources/views') => resource_path('views/vendor/rinvex/laravel-widgets')], 'rinvex-widgets-views');
     }
 
     /**

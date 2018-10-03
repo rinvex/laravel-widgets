@@ -32,7 +32,7 @@ abstract class AbstractWidget
      *
      * @var string
      */
-    protected $container = 'rinvex/widgets::container';
+    protected $container = 'rinvex/laravel-widgets::container';
 
     /**
      * Constructor.
