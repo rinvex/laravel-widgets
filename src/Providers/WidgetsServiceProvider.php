@@ -65,7 +65,7 @@ class WidgetsServiceProvider extends ServiceProvider
     {
         // Load resources
         $this->loadRoutes($router);
-        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'rinvex/laravel-widgets');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'rinvex/widgets');
 
         // Publish Resources
         ! $this->app->runningInConsole() || $this->publishResources();

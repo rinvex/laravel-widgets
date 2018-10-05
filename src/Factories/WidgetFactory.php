@@ -97,7 +97,7 @@ class WidgetFactory
         $asyncCall = $this->constructAsyncCall();
         $template = $timeout ? 'reloader' : 'loader';
 
-        return view("rinvex/laravel-widgets::{$template}", compact('timeout', 'asyncCall'))->render();
+        return view("rinvex/widgets::{$template}", compact('timeout', 'asyncCall'))->render();
     }
 
     /**
@@ -113,7 +113,7 @@ class WidgetFactory
             'params' => $this->encryptWidgetParams($this->widget->getParams() + ['async' => true]),
         ];
 
-        return view('rinvex/laravel-widgets::async', compact('params'))->render();
+        return view('rinvex/widgets::async', compact('params'))->render();
     }
 
     /**
