@@ -16,6 +16,7 @@
     ```shell
     composer require rinvex/laravel-widgets
     ```
+
 2. Done!
 
 
