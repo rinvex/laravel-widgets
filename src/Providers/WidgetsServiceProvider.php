@@ -6,12 +6,15 @@ namespace Rinvex\Widgets\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Rinvex\Support\Traits\ConsoleTools;
 use Rinvex\Widgets\Factories\WidgetFactory;
 use Illuminate\View\Compilers\BladeCompiler;
 use Rinvex\Widgets\Console\Commands\WidgetMakeCommand;
 
 class WidgetsServiceProvider extends ServiceProvider
 {
+    use ConsoleTools;
+
     /**
      * Register the service provider.
      *
@@ -26,7 +29,7 @@ class WidgetsServiceProvider extends ServiceProvider
         $this->registerWidgetCollection();
 
         // Register console commands
-        ! $this->app->runningInConsole() || $this->registerCommands();
+        ! $this->app->runningInConsole() || $this->registerWidgetCommands();
     }
 
     /**
@@ -68,7 +71,8 @@ class WidgetsServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'rinvex/widgets');
 
         // Publish Resources
-        ! $this->app->runningInConsole() || $this->publishResources();
+        ! $this->app->runningInConsole() || $this->publishesViews('rinvex/laravel-widgets');
+        ! $this->app->runningInConsole() || $this->publishesConfig('rinvex/laravel-widgets');
 
         // Register blade extensions
         $this->registerBladeExtensions();
@@ -101,22 +105,11 @@ class WidgetsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Publish resources.
-     *
-     * @return void
-     */
-    protected function publishResources(): void
-    {
-        $this->publishes([realpath(__DIR__.'/../../config/config.php') => config_path('rinvex.widgets.php')], 'rinvex-widgets-config');
-        $this->publishes([realpath(__DIR__.'/../../resources/views') => resource_path('views/vendor/rinvex/laravel-widgets')], 'rinvex-widgets-views');
-    }
-
-    /**
      * Register console commands.
      *
      * @return void
      */
-    protected function registerCommands(): void
+    protected function registerWidgetCommands(): void
     {
         // Register artisan commands
         $this->app->singleton('command.rinvex.widgets.make', function ($app) {
