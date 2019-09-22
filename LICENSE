@@ -1,21 +1,23 @@
-The MIT License (MIT)
+git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v2.2.1 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
 
-Copyright (c) 2016-2020, Rinvex LLC,
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+cd ../laravel-addresses && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-attributes && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-auth && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-authy && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v6.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-bookings && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-cacheable && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-categories && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-composer && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-contacts && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-forms && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-menus && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-pages && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-repositories && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v5.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-statistics && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-subscriptions && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-support && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-tags && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-tenants && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-testimonials && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
+cd ../laravel-widgets && git add -fA && git commit -am "Bump version" && export GIT_MERGE_AUTOEDIT=no && git flow release finish -m "no message" v3.0.0 && unset GIT_MERGE_AUTOEDIT && git push -v --tags origin refs/heads/develop:refs/heads/develop refs/heads/master:refs/heads/master
