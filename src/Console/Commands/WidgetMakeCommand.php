@@ -36,7 +36,7 @@ class WidgetMakeCommand extends GeneratorCommand
      */
     protected function getStub(): string
     {
-        return __DIR__.'../../../resources/stubs/widget.stub';
+        return __DIR__.'/../../../resources/stubs/widget.stub';
     }
 
     /**
