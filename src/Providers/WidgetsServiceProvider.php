@@ -71,8 +71,8 @@ class WidgetsServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'rinvex/widgets');
 
         // Publish Resources
-        ! $this->app->runningInConsole() || $this->publishesViews('rinvex/laravel-widgets');
-        ! $this->app->runningInConsole() || $this->publishesConfig('rinvex/laravel-widgets');
+        $this->publishesViews('rinvex/laravel-widgets');
+        $this->publishesConfig('rinvex/laravel-widgets');
 
         // Register blade extensions
         $this->registerBladeExtensions();
