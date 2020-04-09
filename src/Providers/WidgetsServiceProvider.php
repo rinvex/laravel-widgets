@@ -29,7 +29,7 @@ class WidgetsServiceProvider extends ServiceProvider
         $this->registerWidgetCollection();
 
         // Register console commands
-        ! $this->app->runningInConsole() || $this->registerWidgetCommands();
+        $this->registerCommands();
     }
 
     /**
@@ -109,7 +109,7 @@ class WidgetsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerWidgetCommands(): void
+    protected function registerCommands(): void
     {
         // Register artisan commands
         $this->app->singleton('command.rinvex.widgets.make', function ($app) {
