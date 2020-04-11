@@ -29,7 +29,7 @@ class WidgetsServiceProvider extends ServiceProvider
         $this->registerWidgetCollection();
 
         // Register console commands
-        $this->registerCommands();
+        $this->registerCommands($this->commands);
     }
 
     /**
