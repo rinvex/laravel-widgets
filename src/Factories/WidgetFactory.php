@@ -103,13 +103,14 @@ class WidgetFactory
     /**
      * Construct async call for loaders.
      *
+     * @throws \Throwable
+     *
      * @return string
      */
     protected function constructAsyncCall(): string
     {
         $params = [
             'id' => $this->widget->getId(),
-            'name' => urlencode($this->widget->getName()),
             'params' => $this->encryptWidgetParams($this->widget->getParams() + ['async' => true]),
         ];
 
