@@ -16,6 +16,15 @@ class WidgetsServiceProvider extends ServiceProvider
     use ConsoleTools;
 
     /**
+     * The commands to be registered.
+     *
+     * @var array
+     */
+    protected $commands = [
+        WidgetMakeCommand::class => 'command.rinvex.widgets.make',
+    ];
+
+    /**
      * Register the service provider.
      *
      * @return void
@@ -107,16 +116,18 @@ class WidgetsServiceProvider extends ServiceProvider
     /**
      * Register console commands.
      *
+     * @param array $commands
+     *
      * @return void
      */
-    protected function registerCommands(): void
+    protected function registerCommands(array $commands): void
     {
         // Register artisan commands
         $this->app->singleton('command.rinvex.widgets.make', function ($app) {
             return new WidgetMakeCommand($app['files']);
         });
 
-        $this->commands(['command.rinvex.widgets.make']);
+        $this->commands(array_values($commands));
     }
 
     /**
