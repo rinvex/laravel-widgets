@@ -1,5 +1,5 @@
 <script>
     setTimeout(function() {
-        {{ $asyncCall }}
+        {!! $asyncCall !!}
     }, {{ $timeout }})
 </script>

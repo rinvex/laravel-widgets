@@ -1,3 +1,3 @@
 <script>
-    {{ $asyncCall }}
+    {!! $asyncCall !!}
 </script>
